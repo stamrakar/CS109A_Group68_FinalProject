@@ -1,3 +1,5 @@
+### [EDA](/EDA.md)  | [References](/References.md) | 
+
 ## Introduction and EDA
 
 ### PROBLEM STATEMENT
