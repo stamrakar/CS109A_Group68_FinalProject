@@ -4,6 +4,7 @@ notebook:
 nav_include: 1
 ---
 
+### [EDA](/EDA.md)  | [References](/References.md) | 
 
 
 ### CS109A FinalProject - Group#68
