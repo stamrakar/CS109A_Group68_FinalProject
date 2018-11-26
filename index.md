@@ -1,5 +1,5 @@
 
-### [EDA](/EDA.md)  | [References](/EDA.md) 
+### [EDA](/EDA.md)  | [References](/References.md) | 
 
 #### CS109A FinalProject - Group68
 
