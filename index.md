@@ -7,11 +7,7 @@ How to predict the probability of a given twitter account to be a bot (bot: no d
   2. Solve as an unsupervised problem of clustering twitter accounts into 2 (or several) clusters
 
 
-
 This is an [example link](http://example.com/).
-
-EDA.md
-
 
 CS109A_Group68_FinalProject/EDA.md
       
