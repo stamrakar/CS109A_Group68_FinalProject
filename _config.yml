@@ -1,7 +1,4 @@
 theme: jekyll-theme-cayman
 title: CS109A FinalProject-Group68
 description: Machine Learning & Analysis for Twitter Bot Detection
-baseurl:
 markdown: kramdown
-kramdown:
-    syntax_highlighter: rouge
