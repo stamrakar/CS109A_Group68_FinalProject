@@ -33,3 +33,5 @@ with open("gdrive/My Drive/Twitter/tweets_sample.json") as td:
 ```
 data[1]
 ```
+
+<script src="https://gist.github.com/stamrakar/6c4589d06c950b65893f56e0fa9a40d5.js"></script>
