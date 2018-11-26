@@ -13,6 +13,7 @@ nav_include: 2
       1.1.1. API (Tweets)
 ...
 
+
 ### Preliminary EDA
 
 ```python
@@ -20,13 +21,4 @@ nav_include: 2
 import json as json
 import pandas as pd
 ```
-
-```python
-#open json file
-data = []
-# gdrive/My Drive/Twitter/tweets_sample.json
-with open("gdrive/My Drive/Twitter/tweets_sample.json") as td:
-    for line in td:
-        data.append(json.loads(line))   
-        
-```
+...
