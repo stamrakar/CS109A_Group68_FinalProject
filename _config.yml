@@ -1,9 +1,7 @@
 theme: jekyll-theme-slate
 title: CS109A FinalProject-Group68
-description: Detecting walking and running slopes using IMUS
+description: Machine Learning & Analysis for Twitter Bot Detection
 baseurl:
 markdown: kramdown
 kramdown:
-    math_engine: mathjax
-    input: GFM
     syntax_highlighter: rouge
