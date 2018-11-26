@@ -15,3 +15,4 @@ EDA.md
 
 CS109A_Group68_FinalProject/EDA.md
       
+See my [EDA](/EDA.md)  
