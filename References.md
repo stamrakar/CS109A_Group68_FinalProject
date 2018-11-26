@@ -1,7 +1,7 @@
 ### [EDA](/EDA.md)  | [References](/References.md) | 
 
 ## References
-  * Stefan Wojcik, ["Bots in the Twittersphere"](http://www.pewinternet.org/2018/04/09/bots-in- the-twittersphere/)
+  * Stefan Wojcik, ["Bots in the Twittersphere"](http://www.pewinternet.org/2018/04/09/bots-in-the-twittersphere/)
   
   * ChrisBaraniuk,["How Twitter Bots Help Fuel Political Feuds"](https://www.scientificamerican.com/article/how-twitter-bots-help-fuel-political-feuds/)
   
