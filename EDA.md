@@ -15,7 +15,7 @@ How to predict the probability of a given twitter account to be a bot (bot: no d
 
 ### Preliminary EDA
 
-```
+```python
 # Libraries Needed
 import json as json
 import pandas as pd
