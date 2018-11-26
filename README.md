@@ -1,1 +1,1 @@
-# CS109A_Group68_FinalProject
+# CS109A FinalProject - Group 68
