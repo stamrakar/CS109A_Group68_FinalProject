@@ -1,5 +1,5 @@
 ---
-title: CS109A FinalProject - Group #68
+title: CS109A Final Project
 ---
 
 # CS109A Data Science Final Project
