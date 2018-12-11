@@ -1,30 +1,3 @@
----
-nav_include: 1
-title: TestNotebook
-notebook: Final_Project_TestFile.ipynb
----
-
-```
-# for loading colab file
-# please delete before submission
-from google.colab import drive
-drive.mount('/content/gdrive')
-# example - load file: gdrive/My Drive/Twitter/Milestone 4/Data/50_accounts_200_tweets_each_final.json
-```
-
-
-    Go to this URL in a browser: https://accounts.google.com/o/oauth2/auth?client_id=947318989803-6bn6qk8qdgf4n4g3pfee6491hc0brc4i.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdocs.test%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.photos.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fpeopleapi.readonly&response_type=code
-    
-    Enter your authorization code:
-    ··········
-    Mounted at /content/gdrive
-
-
-GENERAL TO DOs: <BR/>
-- update links / table of contents
-- review project guideline and make sure we've included all items
-- add rationale for each decision
-- showing results appropriately (add print and text)
 
 <center><h1><i><b> Machine Learning Analysis for Twitter Bot Detection</b></i></h1></center>
 
@@ -101,7 +74,7 @@ How to detect Twitter Bots using tweets data from Twitter developer API by using
 
 
 
-```
+```python
 #@title 
 # Import Libraries, Global Options and Styles
 import requests
@@ -225,7 +198,7 @@ We requested every 2 seconds for 100 tweets each for 15 request and received 127
 
 
 
-```
+```python
 # http://www.tweepy.org/
 import tweepy
 
@@ -242,7 +215,7 @@ if (not api):
 
 
 
-```
+```python
 # The following code was adapted from sample code provided by TFs / Profs for this project
 
 def collect_tweets(maxTs, requestCount, filename):
@@ -309,7 +282,7 @@ def collect_tweets(maxTs, requestCount, filename):
 
 
 
-```
+```python
 # we first collected a small sample data of about 1000 (which we will use botometer to encode)
 collect_tweets(1500, 13, 'immigration_brexit_bitcoin.json')
 ```
@@ -320,7 +293,7 @@ We requested every 2 seconds for 100 tweet each for 13 reqyests and received 127
 
 
 
-```
+```python
 # then we collect a larger sample (which we will use botometer to encode)
 collect_tweets(12000, 120, 'immigration_brexit_bitcoin_extended.json')
 ```
@@ -328,7 +301,7 @@ collect_tweets(12000, 120, 'immigration_brexit_bitcoin_extended.json')
 
 
 
-```
+```python
 # load the file
 raw_df_core = pd.read_json('immigration_brexit_bitcoin.json')
 raw_df_extended = pd.read_json('immigration_brexit_bitcoin_extended.json', lines=True)
@@ -337,7 +310,7 @@ raw_df_extended = pd.read_json('immigration_brexit_bitcoin_extended.json', lines
 
 
 
-```
+```python
 # take a look at the separate data
 display(raw_df_core.shape)
 display(raw_df_extended.shape)
@@ -346,7 +319,7 @@ display(raw_df_extended.shape)
 
 
 
-```
+```python
 # combine the two data sets
 raw_df = pd.concat([raw_df_core, raw_df_extended], ignore_index=True)
 ```
@@ -354,7 +327,7 @@ raw_df = pd.concat([raw_df_core, raw_df_extended], ignore_index=True)
 
 
 
-```
+```python
 # take a look at the combined data
 display(raw_df.head(5))
 display(raw_df.shape)
@@ -363,14 +336,14 @@ display(raw_df.shape)
 
 
 
-```
+```python
 raw_df.shape
 ```
 
 
 
 
-```
+```python
 # delete duplicate accounts
 raw_df = raw_df.drop_duplicates(subset='id_str')
 raw_df.shape
@@ -379,7 +352,7 @@ raw_df.shape
 
 
 
-```
+```python
 # save as csv
 raw_df.to_csv('immigration_brexit_bitcoin_full.csv')
 
@@ -396,7 +369,7 @@ raw_df.to_json('immigration_brexit_bitcoin_full.json')
 
 
 
-```
+```python
 #load the data
 raw_df = pd.read_json('immigration_brexit_bitcoin_full.json')
 raw_df.head(5)
@@ -624,7 +597,7 @@ raw_df.head(5)
 
 
 
-```
+```python
 # add account id to dataframe
 raw_df['id'] = raw_df['user'].map(lambda d: d['id'])
 ```
@@ -632,7 +605,7 @@ raw_df['id'] = raw_df['user'].map(lambda d: d['id'])
 
 
 
-```
+```python
 # set up botometer
 # the code below was adapted from 
 # https://github.com/IUNetSci/botometer-python
@@ -654,7 +627,7 @@ bom = botometer.Botometer(wait_on_ratelimit=True,
 
 
 
-```
+```python
 # retrieve response objects from Botometer
 botometer_results = {}
 count = 0
@@ -668,7 +641,7 @@ for index, user_id in raw_df['id'].iteritems():
 
 
 
-```
+```python
 # convert to series
 botometer_series = pd.Series(botometer_results)
 ```
@@ -676,7 +649,7 @@ botometer_series = pd.Series(botometer_results)
 
 
 
-```
+```python
 # add results to a new column
 raw_df['botometer_result'] = botometer_series
 ```
@@ -684,7 +657,7 @@ raw_df['botometer_result'] = botometer_series
 
 
 
-```
+```python
 # a quick look at botometer results
 raw_df['botometer_result'][0]
 ```
@@ -692,7 +665,7 @@ raw_df['botometer_result'][0]
 
 
 
-```
+```python
 # extract universal score (botometer score)
 raw_df['boto_univ'] = raw_df['botometer_result'].map(lambda s: s['cap']['universal'])
 raw_df['boto_univ'].describe()
@@ -701,7 +674,7 @@ raw_df['boto_univ'].describe()
 
 
 
-```
+```python
 # encode bot / non-bot via score of 0.5 threshold
 threshold = 0.5
 raw_df['class_boto'] = np.where(raw_df['boto_univ']>threshold, 1, 0)
@@ -710,7 +683,7 @@ raw_df['class_boto'] = np.where(raw_df['boto_univ']>threshold, 1, 0)
 
 
 
-```
+```python
 # examine number of 'bots' as identified by Botometer
 sum(raw_df['class_boto'])
 ```
@@ -718,7 +691,7 @@ sum(raw_df['class_boto'])
 
 
 
-```
+```python
 # save as csv
 raw_df.to_csv('immigration_brexit_bitcoin_boto.csv')
 
@@ -749,7 +722,7 @@ After examing the accounts associated with the tweets, we selected 50 bot accoun
 
 
 
-```
+```python
 # load the core / small dataset, from which we will manually identify 25 bots and 25 non-bot accounts
 raw_df_core = pd.read_json('immigration_brexit_bitcoin.json')
 raw_df_core.head(5)
@@ -1001,7 +974,7 @@ raw_df_core.head(5)
 
 
 
-```
+```python
 # to verify each user, we only need "screen_name"
 raw_df_core['screen_name'] = raw_df_core['user'].map(lambda d: d['screen_name'])
 ```
@@ -1009,7 +982,7 @@ raw_df_core['screen_name'] = raw_df_core['user'].map(lambda d: d['screen_name'])
 
 
 
-```
+```python
 # add botometer score to the core dataset
 raw_df_core = pd.merge(raw_df_core, raw_df[['class_boto','class_verified', 'boto_univ', 'screen_name']], left_on='screen_name', right_on='screen_name')
 ```
@@ -1017,7 +990,7 @@ raw_df_core = pd.merge(raw_df_core, raw_df[['class_boto','class_verified', 'boto
 
 
 
-```
+```python
 # form a simple dataframe with only screen_name and Botometer score for references (so we can manually verify accounts)
 # create 'class_verified for verified score'
 raw_df_verify = raw_df_core.loc[:,['screen_name', 'class_boto', 'boto_univ','class_verified']]
@@ -1026,7 +999,7 @@ raw_df_verify = raw_df_core.loc[:,['screen_name', 'class_boto', 'boto_univ','cla
 
 
 
-```
+```python
 # delete duplicate rows
 raw_df_verify.drop_duplicates(subset='screen_name')
 ```
@@ -1496,7 +1469,7 @@ raw_df_verify.drop_duplicates(subset='screen_name')
 
 
 
-```
+```python
 # save as csv (so we can manually verify and input results in excel)
 raw_df_verify.to_csv('boto_to_verify.csv')
 ```
@@ -1510,7 +1483,7 @@ For each tweet, we requested users' most recent 200 tweets using api.user_timeli
 
 
 
-```
+```python
 # get the list of bot names and non-bot names
 users_list = raw_df.loc[raw_df_verify['class_boto']==0]['screen_name'].tolist()
 bots_list = raw_df.loc[raw_df_verify['class_boto']==1]['screen_name'].tolist()
@@ -1522,7 +1495,7 @@ names = users_list + bots_list
 
 
 
-```
+```python
 def get_tweets(names, fName, t_count, verify_df):
     # INPUT:
     # names: list of screen_name
@@ -1563,7 +1536,7 @@ def get_tweets(names, fName, t_count, verify_df):
 
 
 
-```
+```python
 # get max 200 tweets for each user
 tweets_df = get_tweets(names=names, fName='tweets.json', t_count=200, verify_df=raw_df_verify) #the fName and corresponding data will be updated later
 ```
@@ -1636,7 +1609,7 @@ parsing features, Include only features with value and drop features with mostly
 
 
 
-```
+```python
 # read the dataset
 tweets_df = pd.read_json('tweets.json', lines=True)
 ```
@@ -1644,7 +1617,7 @@ tweets_df = pd.read_json('tweets.json', lines=True)
 
 
 
-```
+```python
 # explode 'entities', 'user'
 # although it would be interesting to see 'retweeted_status', it might be a bit too complicated
 # especially when the # of reweets of the retweeted post is availabel directly ('retweet_count')
@@ -1661,7 +1634,7 @@ def explode(df):
 
 
 
-```
+```python
 # parse
 tweets_df = explode(tweets_df)
 tweets_df.head()
@@ -2322,7 +2295,7 @@ tweets_df.head()
 
 
 
-```
+```python
 # append botometer univ_value and classifications
 tweets_df = pd.merge(tweets_df, raw_df_verify[['screen_name', 'class_boto', 'boto_univ', 'class_verified']], left_on='user_screen_name', right_on='screen_name')
 len(tweets_df.columns.values)
@@ -2338,7 +2311,7 @@ len(tweets_df.columns.values)
 
 
 
-```
+```python
 # heatmap to visualize the missing data in different columns
 sns.set(style="darkgrid")
 sns.set_context("poster")
@@ -2359,19 +2332,19 @@ def get_heatmap(df, imgName='NaN_heatmap.png'):
 
 
 
-```
+```python
 #plotting first null values
 get_heatmap(tweets_df.ix[:,0:21], imgName='NaN_heatmap_col0_20.png')
 ```
 
 
 
-![png](Final_Project_TestFile_files/Final_Project_TestFile_55_0.png)
+![png](Final_Project_TestFile_files/Final_Project_TestFile_53_0.png)
 
 
 
 
-```
+```python
 # obviously there are many columns are mostly missing values
 # we want to drop the columns that miss more than 50% of the time
 threshold = len(tweets_df.columns.values)*0.5
@@ -2381,7 +2354,7 @@ tweets_df_clean = tweets_df.dropna(thresh = threshold, axis='columns')
 
 
 
-```
+```python
 # take a look at the columns left (reduced from 116 to 59 columns)
 display(len(tweets_df_clean.columns.values))
 display(tweets_df_clean.head(5))
@@ -2814,7 +2787,7 @@ display(tweets_df_clean.head(5))
 
 
 
-```
+```python
 # duplicated columns
 col_duplicate = ['entities','user', 'id_str', 'lang', 'user_lang', 'user_id', 'user_id_str']
 # we dropped 'lang' as we only use english accounts for our dataset
@@ -2828,7 +2801,7 @@ col_not_interested = ['source', 'user_entities']
 
 
 
-```
+```python
 # drop duplicated columns and columns that we are not interested
 tweets_df = tweets_df_clean.drop(columns= (col_duplicate + col_not_interested))
 ```
@@ -2850,7 +2823,7 @@ feature engineering of tweet features: <br/>
 
 
 
-```
+```python
 tweets_df.head()
 ```
 
@@ -3226,7 +3199,7 @@ tweets_df.head()
 
 
 
-```
+```python
 # although using tweet_mode='extended', we are still not getting the full text
 # therefore, we tried to get full_text from retweeted_status
 tweets_df['text_rt'] = tweets_df['retweeted_status'].map(lambda x: x['full_text'] if x and not isinstance(x, float) and ('full_text' in x) else None)
@@ -3369,7 +3342,7 @@ tweets_df[['text_tweet', 'text_rt']].head(20)
 
 
 
-```
+```python
 # encode tweet features
 
 # 1 = has extende entities; 0 = don't have extende entities
@@ -3798,7 +3771,7 @@ feature engineering of user features: <br/>
 
 
 
-```
+```python
 # account feature engineering
 # create an intermedium df with all account-related data from tweets
 
@@ -3809,7 +3782,7 @@ users_description_len_df['user_description_len'] = users_description_len_df['use
 
 
 
-```
+```python
 # account feature engineering
 # get tweets interval stats (in seconds)
 
@@ -3900,7 +3873,7 @@ tweet_time_stats_df.head()
 
 
 
-```
+```python
 # account feature engineering
 # get account age (in seconds)
 
@@ -3971,7 +3944,7 @@ user_account_age_df.head()
 
 
 
-```
+```python
 # account feature engineering
 # create a new dataframe with engineered features that are associated with each user
 users_df = pd.DataFrame(tweets_df['screen_name']).drop_duplicates(subset='screen_name')
@@ -4071,7 +4044,7 @@ users_df.head(5)
 
 
 
-```
+```python
 # merge the account information back to the dataset
 tweets_df = pd.merge(tweets_df, users_df, left_on='screen_name', right_on='screen_name')
 tweets_df.head(5)
@@ -4502,7 +4475,7 @@ drop the columns that are no longer interesting / useful
 
 
 
-```
+```python
 # delete columns that no longer useful
 col_del = ['display_text_range', 'in_reply_to_status_id_str', 'in_reply_to_user_id_str','in_reply_to_status_id', 
            'in_reply_to_user_id', 'quoted_status', 'quoted_status_id', 'quoted_status_id_str',
@@ -4752,7 +4725,7 @@ tweets_df.head(5)
 
 
 
-```
+```python
 # create list of columns names for different categories
 col_boto = list(tweets_df[['class_boto', 'boto_univ']].columns.values)
 col_response = ['class_boto']
@@ -4765,7 +4738,7 @@ col_pred_numerical = list(tweets_df.select_dtypes(['float64', 'int64']).drop(col
 
 
 
-```
+```python
 # take a look at the more structured / cleaned up data
 display(tweets_df.describe())
 display(tweets_df.shape)
@@ -5036,7 +5009,7 @@ display(tweets_df.shape)
 
 
 
-```
+```python
 # delete numerical columns that have mean or std equals 0 (which implies same values for the columns)
 col_name_del = []
 for col in col_pred_numerical:
@@ -5058,7 +5031,7 @@ print ('{} are deleted as they only have one values across all the rows.'.format
 
 
 
-```
+```python
 # save columns
 c_list_names = ['col_pred_numerical', 'col_boto', 'col_response', 'col_pred_text', 'col_id', 'col_verified']
 c_list = [col_pred_numerical, col_boto, col_response, col_pred_text, col_id, col_verified]
@@ -5079,7 +5052,7 @@ for c_name, c in zip(c_list_names, c_list):
 
 
 
-```
+```python
 col_nlp_text = ['tweet_len_mean', 'tweet_len_std', 'tweet_word_mean', 'tweet_word_std',
                 'retweet_len_mean', 'retweet_len_std', 'retweet_word_mean', 'retweet_word_std']
 
@@ -5091,7 +5064,7 @@ with open('col_nlp_text.txt', 'w') as fp:
 
 
 
-```
+```python
 # function to get tweet length
 def get_tweet_lens(tweet_series):
   return tweet_series.dropna().map(lambda s: len(s))
@@ -5100,7 +5073,7 @@ def get_tweet_lens(tweet_series):
 
 
 
-```
+```python
 # function to get length of each word. filtering out hashtags, @, and links
 def get_tweet_word_lens(tweet_series):
   tweets = tweet_series.dropna().values.tolist()
@@ -5113,7 +5086,7 @@ def get_tweet_word_lens(tweet_series):
 
 
 
-```
+```python
 # function to create feature
 def tweet_text_features(df):
   cols = col_nlp_text
@@ -5131,7 +5104,7 @@ def tweet_text_features(df):
 
 
 
-```
+```python
 # get text features
 text_df = tweets_df.groupby("screen_name").apply(tweet_text_features).reset_index()
 ```
@@ -5139,7 +5112,7 @@ text_df = tweets_df.groupby("screen_name").apply(tweet_text_features).reset_inde
 
 
 
-```
+```python
 # merge text features with tweets_df
 tweets_df = pd.merge(tweets_df, text_df, left_on='screen_name', right_on='screen_name')
 ```
@@ -5147,7 +5120,7 @@ tweets_df = pd.merge(tweets_df, text_df, left_on='screen_name', right_on='screen
 
 
 
-```
+```python
 tweets_df.head()
 ```
 
@@ -5415,7 +5388,7 @@ tweets_df.head()
 
 
 
-```
+```python
 tweets_df.head(5)
 ```
 
@@ -5677,7 +5650,7 @@ tweets_df.head(5)
 
 
 
-```
+```python
 # separte bots and non-bots for easy plotting
 tweets_0 = tweets_df.loc[tweets_df['class_verified']==0]
 tweets_1 = tweets_df.loc[tweets_df['class_verified']==1]
@@ -5686,7 +5659,7 @@ tweets_1 = tweets_df.loc[tweets_df['class_verified']==1]
 
 
 
-```
+```python
 # scatter plot
 def scatterplot (col1, col2, xlimit, ylimit):
     plt.scatter(tweets_1[col1], tweets_1[col2], s=5, color='salmon', label='bot', alpha=0.75)
@@ -5704,7 +5677,7 @@ def scatterplot (col1, col2, xlimit, ylimit):
 
 
 
-```
+```python
 # histogram
 def hist_plot(col, xlabel, ylabel, title):
     plt.hist(col)
@@ -5718,10 +5691,36 @@ def hist_plot(col, xlabel, ylabel, title):
 
 
 
-```
+```python
 # quick plots
 plt.figure(figsize=(6,4))
 hist_plot(tweets_0['tweet_time_min'], 'tweets_minimum_time_interval','count', 'minimum time interval among all tweets for each real user')
+```
+
+
+
+![png](Final_Project_TestFile_files/Final_Project_TestFile_89_0.png)
+
+
+
+
+```python
+# quick plots
+plt.figure(figsize=(6,4))
+hist_plot(tweets_1['tweet_time_min'], 'tweets_minimum_time_interval','count', 'minimum time interval among all tweets for each bot')
+```
+
+
+
+![png](Final_Project_TestFile_files/Final_Project_TestFile_90_0.png)
+
+
+
+
+```python
+# quick plots
+plt.figure(figsize=(6,4))
+hist_plot(tweets_0['tweet_time_std'], 'tweets_minimum_time_interval','count', 'std time interval among all tweets for each real user')
 ```
 
 
@@ -5731,33 +5730,7 @@ hist_plot(tweets_0['tweet_time_min'], 'tweets_minimum_time_interval','count', 'm
 
 
 
-```
-# quick plots
-plt.figure(figsize=(6,4))
-hist_plot(tweets_1['tweet_time_min'], 'tweets_minimum_time_interval','count', 'minimum time interval among all tweets for each bot')
-```
-
-
-
-![png](Final_Project_TestFile_files/Final_Project_TestFile_92_0.png)
-
-
-
-
-```
-# quick plots
-plt.figure(figsize=(6,4))
-hist_plot(tweets_0['tweet_time_std'], 'tweets_minimum_time_interval','count', 'std time interval among all tweets for each real user')
-```
-
-
-
-![png](Final_Project_TestFile_files/Final_Project_TestFile_93_0.png)
-
-
-
-
-```
+```python
 # quick plots
 plt.figure(figsize=(6,4))
 hist_plot(tweets_1['tweet_time_std'], 'tweets_minimum_time_interval','count', 'std time interval among all tweets for each bot')
@@ -5765,7 +5738,7 @@ hist_plot(tweets_1['tweet_time_std'], 'tweets_minimum_time_interval','count', 's
 
 
 
-![png](Final_Project_TestFile_files/Final_Project_TestFile_94_0.png)
+![png](Final_Project_TestFile_files/Final_Project_TestFile_92_0.png)
 
 
 From the four plots above, it looks like the bots have significantly smaller std of tweet interval times (which implies more uniform patter) than actual users. <br/>
@@ -5774,7 +5747,7 @@ From the four plots above, it looks like the bots have significantly smaller std
 
 
 
-```
+```python
 # quick plots
 plt.figure(figsize=(6,4))
 scatterplot('user_description_len', 'tweet_time_std', [0,200], [0,50000])
@@ -5782,7 +5755,7 @@ scatterplot('user_description_len', 'tweet_time_std', [0,200], [0,50000])
 
 
 
-![png](Final_Project_TestFile_files/Final_Project_TestFile_96_0.png)
+![png](Final_Project_TestFile_files/Final_Project_TestFile_94_0.png)
 
 
 It was quite obvious from the plot above that non-bot users tend to have account description with mostly around maximum allowed characters. In contrast, the bots tend to have significantly shorter descriptions and much more even distribution. <br/>
@@ -5791,7 +5764,7 @@ The standard deviation of tweet time interval for each account seems be able to 
 
 
 
-```
+```python
 # quick plots
 plt.figure(figsize=(6,4))
 scatterplot('account_age', 'tweet_time_min', [0,400000000], [0,10])
@@ -5799,14 +5772,14 @@ scatterplot('account_age', 'tweet_time_min', [0,400000000], [0,10])
 
 
 
-![png](Final_Project_TestFile_files/Final_Project_TestFile_98_0.png)
+![png](Final_Project_TestFile_files/Final_Project_TestFile_96_0.png)
 
 
 it seems that bots tend to have longer min tweet intervals with newer accounts, and longer tweet time itnerval with older accounts. In contrast, it seems non-bot users have shorter minimum tweet intervals with newer accounts; however, the minimum tweet interval increase with the increase of account age.
 
 
 
-```
+```python
 # quick plots
 plt.figure(figsize=(6,4))
 scatterplot('account_age', 'user_statuses_count', [0,400000000], [0,100000])
@@ -5814,7 +5787,7 @@ scatterplot('account_age', 'user_statuses_count', [0,400000000], [0,100000])
 
 
 
-![png](Final_Project_TestFile_files/Final_Project_TestFile_100_0.png)
+![png](Final_Project_TestFile_files/Final_Project_TestFile_98_0.png)
 
 
 It seems the bot tend to have significantly shorter account age and significantly more tweets than non-bot accounts with the same account age.
@@ -5827,7 +5800,7 @@ It seems the bot tend to have significantly shorter account age and significantl
 
 
 
-```
+```python
 # correlation matrix
 # to be updated
 
@@ -5842,12 +5815,12 @@ ax.set_yticklabels([''] + labels_corr);
 
 
 
-![png](Final_Project_TestFile_files/Final_Project_TestFile_103_0.png)
+![png](Final_Project_TestFile_files/Final_Project_TestFile_101_0.png)
 
 
 
 
-```
+```python
 # to be refined
 
 scatter_matrix(tweets_df[col_pred_numerical], alpha=0.5, figsize=(25,20));
@@ -5856,7 +5829,7 @@ scatter_matrix(tweets_df[col_pred_numerical], alpha=0.5, figsize=(25,20));
 
 
 
-```
+```python
 # correlation matrix - to be udpated
 pd.DataFrame(tweets_df[col_corr].corr())
 ```
@@ -5945,7 +5918,7 @@ standardize numerical features
 
 
 
-```
+```python
 # current feature types
 tweets_df.dtypes
 ```
@@ -5995,7 +5968,7 @@ tweets_df.dtypes
 
 
 
-```
+```python
 from sklearn import preprocessing
 
 def standardize(df):
@@ -6008,7 +5981,7 @@ def standardize(df):
 
 
 
-```
+```python
 # create a new copy with numercial columns standardized
 tweets_df[col_pred_numerical] = standardize(tweets_df[col_pred_numerical])
 ```
@@ -6016,7 +5989,7 @@ tweets_df[col_pred_numerical] = standardize(tweets_df[col_pred_numerical])
 
 
 
-```
+```python
 # check if the copy 
 display(tweets_df.describe())
 display(tweets_df.head())
@@ -6571,7 +6544,7 @@ display(tweets_df.head())
 
 
 
-```
+```python
 # save to json
 tweets_df.to_json('50_accounts_200_tweets_each_final_std.json')
 ```
@@ -6586,7 +6559,7 @@ tweets_df.to_json('50_accounts_200_tweets_each_final_std.json')
 
 
 
-```
+```python
 # read the data
 tweets_df = pd.read_json('50_accounts_200_tweets_each_final_std.json')
 ```
@@ -6594,7 +6567,7 @@ tweets_df = pd.read_json('50_accounts_200_tweets_each_final_std.json')
 
 
 
-```
+```python
 # Train/Test split 
 '''
 change as needed, do we want test_size of .25?
@@ -6606,7 +6579,7 @@ train_tweets_df, test_tweets_df = train_test_split(tweets_df, test_size=.25,
 
 
 
-```
+```python
 with open('col_pred_numerical.txt', 'r') as fp:
   col_pred_numerical = fp.read().split(',')
 with open('col_boto.txt', 'r') as fp:
@@ -6624,7 +6597,7 @@ with open('col_verified.txt', 'r') as fp:
 
 
 
-```
+```python
 # write a function to split the data
 def split_data(df):
     # num_pred: standardized numerical predictors - what we will be using for most of the models
@@ -6640,7 +6613,7 @@ def split_data(df):
 
 
 
-```
+```python
 # get the predictors, responses, and other features from train and test set
 xtrain, xtrain_text, ytrain, train_id, train_boto = split_data(train_tweets_df)
 xtest, xtest_text, ytest, test_id, test_boto = split_data(test_tweets_df)
@@ -6649,7 +6622,7 @@ xtest, xtest_text, ytest, test_id, test_boto = split_data(test_tweets_df)
 
 
 
-```
+```python
 # create a dictioary to store all our models
 models_list = {}
 ```
@@ -6669,7 +6642,7 @@ models_list = {}
 
 
 
-```
+```python
 # multiple linear regression(no poly)on numerical predictors
 X_train = sm.add_constant(xtrain)
 X_test = sm.add_constant(xtest)
@@ -6680,7 +6653,7 @@ y_test = ytest.reshape(-1,1)
 
 
 
-```
+```python
 # Fit and summarize OLS model
 model = OLS(y_train, X_train)
 results = model.fit()
@@ -6800,7 +6773,7 @@ results.summary()
 
 
 
-```
+```python
 y_hat_train = results.predict()
 y_hat_test = results.predict(exog=X_test)
 
@@ -6816,7 +6789,7 @@ print('Test R^2 = {}'.format(r2_score(test_tweets_df['class_verified'], y_hat_te
 
 
 
-```
+```python
 # accuracy score
 ols_train_acc = accuracy_score(y_train, results.predict(X_train).round())
 ols_test_acc = accuracy_score(y_test, results.predict(X_test).round())
@@ -6831,7 +6804,7 @@ print("Test accuracy is {:.4} %".format(ols_test_acc*100))
 
 
 
-```
+```python
 # save model to the list
 models_list["ols"] = model
 ```
@@ -6845,7 +6818,7 @@ models_list["ols"] = model
 
 
 
-```
+```python
 alphas = np.array([.01, .05, .1, .5, 1, 5, 10, 50, 100])
 fitted_ridge = RidgeCV(alphas=alphas, cv=5).fit(X_train, y_train)
 ```
@@ -6853,7 +6826,7 @@ fitted_ridge = RidgeCV(alphas=alphas, cv=5).fit(X_train, y_train)
 
 
 
-```
+```python
 # accuracy score
 ridge_train_acc = accuracy_score(y_train, fitted_ridge.predict(X_train).round())
 ridge_test_acc = accuracy_score(y_test, fitted_ridge.predict(X_test).round())
@@ -6868,7 +6841,7 @@ print("Test accuracy is {:.4} %".format(ridge_test_acc*100))
 
 
 
-```
+```python
 # save model to the list
 models_list["ridge"] = fitted_ridge
 ```
@@ -6881,14 +6854,14 @@ models_list["ridge"] = fitted_ridge
 
 
 
-```
+```python
 fitted_lasso = LassoCV(alphas=alphas, max_iter=100000, cv=5).fit(X_train, y_train)
 ```
 
 
 
 
-```
+```python
 # accuracy score
 lasso_train_acc = accuracy_score(y_train, fitted_lasso.predict(X_train).round())
 lasso_test_acc = accuracy_score(y_test, fitted_lasso.predict(X_test).round())
@@ -6903,7 +6876,7 @@ print("Test accuracy is {:.4} %".format(lasso_test_acc*100))
 
 
 
-```
+```python
 # save model to the list
 models_list["lasso"] = fitted_lasso
 ```
@@ -6923,7 +6896,7 @@ models_list["lasso"] = fitted_lasso
 
 
 
-```
+```python
 X_train = sm.add_constant(xtrain)
 X_test = sm.add_constant(xtest)
 
@@ -6950,7 +6923,7 @@ print("Test set score: {0:4.4}%".format(logistic_model.score(X_test, ytest)*100)
 
 
 
-```
+```python
 logistic_model_cv = LogisticRegressionCV(Cs=[1,10,100,1000,10000], cv=3, penalty='l2', 
                                        solver='newton-cg').fit(X_train,ytrain)
 
@@ -6973,7 +6946,7 @@ print("Test set score with Cross Validation: {0:4.4}%".format(logistic_model_cv.
 
 
 
-```
+```python
 X_train_poly = PolynomialFeatures(degree=3, include_bias=False).fit_transform(X_train)
 
 logistic_model_poly_cv = LogisticRegressionCV(Cs=[1,10,100,1000,10000], cv=3, penalty='l2', 
@@ -7001,7 +6974,7 @@ print("Test set score with Polynomial Features (degree=3) and with Cross Validat
 
 
 
-```
+```python
 # the code below in KNN is adapted from HW2 solution
 
 # define k values
@@ -7021,7 +6994,7 @@ for k_value in KNNModels:
 
 
 
-```
+```python
 # Generate predictions
 knn_predicted_train = {k: KNNModels[k].predict(xtrain) for k in KNNModels}
 knn_predicted_test = {k: KNNModels[k].predict(xtest) for k in KNNModels}
@@ -7030,7 +7003,7 @@ knn_predicted_test = {k: KNNModels[k].predict(xtest) for k in KNNModels}
 
 
 
-```
+```python
 # create a df  of train test rsquare values with corresponding k values
 knn_r2_train = {k : r2_score(ytrain, knn_predicted_train[k]) for k in k_values}
 knn_r2_test = { k : r2_score(ytest, knn_predicted_test[k]) for k in k_values}
@@ -7188,7 +7161,7 @@ display(knn_r2_df)
 
 
 
-```
+```python
 # plot r2 score versus k
 fig, axes = plt.subplots(figsize = (5,5))
 axes.plot(knn_r2_df['k'], knn_r2_df['Train R^2'], 's-', label='Train $R^2$ Scores')
@@ -7203,14 +7176,14 @@ axes.legend();
 
 
 
-![png](Final_Project_TestFile_files/Final_Project_TestFile_145_0.png)
+![png](Final_Project_TestFile_files/Final_Project_TestFile_143_0.png)
 
 
 It looks like the model reached best r2 values at k=6.
 
 
 
-```
+```python
 # the following code was adapted from HW7 solutions
 def plot_cv(ax, hyperparameter, cv_scores):
     cv_means = np.mean(cv_scores, axis=1)
@@ -7222,7 +7195,7 @@ def plot_cv(ax, hyperparameter, cv_scores):
 
 
 
-```
+```python
 # the following code was adapted from HW7 solutions
 # find the best model
 fig, ax = plt.subplots()
@@ -7241,12 +7214,12 @@ print("Best k:", best_k)
 
 
 
-![png](Final_Project_TestFile_files/Final_Project_TestFile_148_1.png)
+![png](Final_Project_TestFile_files/Final_Project_TestFile_146_1.png)
 
 
 
 
-```
+```python
 # save model to the list
 best_k = 7
 models_list["knn_7"] = KNNModels[best_k].fit(xtrain, ytrain)
@@ -7255,7 +7228,7 @@ models_list["knn_7"] = KNNModels[best_k].fit(xtrain, ytrain)
 
 
 
-```
+```python
 # evaluate classification accuracy
 best_model_KNN_train_score = accuracy_score(ytrain, knn_predicted_train[best_k].round())
 best_model_KNN_test_score = accuracy_score(ytest, knn_predicted_test[best_k].round())
@@ -7276,7 +7249,7 @@ print("Test accuracy is {:.4} %".format(best_model_KNN_test_score*100))
 
 
 
-```
+```python
 depth_list =list(range(1, 18))
 
 cv_means = []
@@ -7312,7 +7285,7 @@ train_scores = np.array(train_scores)
 
 
 
-```
+```python
 plt.subplots(1, 1, figsize=(12,7))
 plt.plot(depth_list, cv_means, '*-', label="Mean CV")
 plt.fill_between(depth_list, cv_means - 2*cv_stds, cv_means + 2*cv_stds, alpha=0.3)
@@ -7327,12 +7300,12 @@ plt.xticks(depth_list);
 
 
 
-![png](Final_Project_TestFile_files/Final_Project_TestFile_153_0.png)
+![png](Final_Project_TestFile_files/Final_Project_TestFile_151_0.png)
 
 
 
 
-```
+```python
 models_list["random_forest"] = rf_model
 
 best_model_DTC_train_score = accuracy_score(ytrain, best_model_DTC.predict(xtrain))
@@ -7366,7 +7339,7 @@ print("Test accuracy is %.4f"%best_model_DTC_test_score)
 
 
 
-```
+```python
 rf = RandomForestClassifier(max_depth=6)
 rf_model = rf.fit(xtrain, ytrain)
 score = rf_model.score(xtest, ytest)
@@ -7385,7 +7358,7 @@ print("Random Forest model score is ", score)
 
 
 
-```
+```python
 AdaBoost_models = {}
 AdaBoost_scores_train = {}
 AdaBoost_scores_test = {}
@@ -7399,7 +7372,7 @@ for e in range(1, 5):
 
 
 
-```
+```python
 fig, ax = plt.subplots(4,1, figsize=(20,35))
 for e in range(0, 4):
     ax[e].plot(AdaBoost_scores_train[e+1], label='Train')
@@ -7435,7 +7408,7 @@ We want to explore unsupervised learning by performing k=2 KMeans clustering wit
 
 
 
-```
+```python
 # read the data
 # tweets_df = pd.read_json('50_accounts_200_tweets_each_final_std.json')
 ```
@@ -7443,7 +7416,7 @@ We want to explore unsupervised learning by performing k=2 KMeans clustering wit
 
 
 
-```
+```python
 from sklearn.cluster import KMeans
 kmeans = KMeans(n_clusters=3, init='random', random_state=0).fit(xtrain.values)
 ```
@@ -7451,7 +7424,7 @@ kmeans = KMeans(n_clusters=3, init='random', random_state=0).fit(xtrain.values)
 
 
 
-```
+```python
 # add the classification result
 k2 = tweets_df[col_pred_numerical]
 
@@ -7461,7 +7434,7 @@ k2['k=2'] = kmeans.labels_
 
 
 
-```
+```python
 # create df for easy plot
 kmean_0 = k2.loc[k2['k=2']==0]
 kmean_1 = k2.loc[k2['k=2']==1]
@@ -7472,7 +7445,7 @@ class_1 = tweets_df.loc[tweets_df['class_verified']==1]
 
 
 
-```
+```python
 # see how many were classified as bots
 print ('The size of the two clusters from kmeans clustering are {} and {}.'.format(len(kmean_0), len(kmean_1)))
 ```
@@ -7483,7 +7456,7 @@ print ('The size of the two clusters from kmeans clustering are {} and {}.'.form
 
 
 
-```
+```python
 # quick plot to see if it naturally come into two clusters
 plt.scatter(kmean_0['account_age'], kmean_0['tweet_time_std'], c='salmon', s=20, label = 'cluster 0', alpha=0.5)
 plt.scatter(kmean_1['account_age'], kmean_1['tweet_time_std'], c='royalblue', s=20, label = 'cluster 1', alpha=0.5)
@@ -7497,12 +7470,12 @@ plt.legend();
 
 
 
-![png](Final_Project_TestFile_files/Final_Project_TestFile_168_0.png)
+![png](Final_Project_TestFile_files/Final_Project_TestFile_166_0.png)
 
 
 
 
-```
+```python
 # 
 verified_df = tweets_df['class_verified', 'id', ''].dropna()
 verified_df = 
@@ -7518,7 +7491,7 @@ verified_df =
 
 
 
-```
+```python
 # TO BE UPDATED!!!!
 # read the verified dataframe
 raw_df_verify = pd.read_csv('boto_verify.csv')
@@ -7604,7 +7577,7 @@ raw_df_verify.head()
 
 
 
-```
+```python
 # join features and botometer result to the verified dataframe
 
 ```
@@ -7612,7 +7585,7 @@ raw_df_verify.head()
 
 
 
-```
+```python
 # discussion and compare results
 ```
 
@@ -7630,7 +7603,7 @@ We want to train a model with two features plus botometer score as predictors, a
 
 
 
-```
+```python
 # use features and botometer score to predict the validated score
 
 def prepare_vf(df, feature1, feature2):
@@ -7657,7 +7630,7 @@ print("Random Forest model, (class_verified ~ account_age, tweet_time_mean, clas
 
 
 
-```
+```python
 # discussion: when we can trust the model, when it is unknown
 ```
 
@@ -7670,7 +7643,7 @@ print("Random Forest model, (class_verified ~ account_age, tweet_time_mean, clas
 
 
 
-```
+```python
 ### Summary Report
 
 models_list
@@ -7679,7 +7652,7 @@ models_list
 
 
 
-```
+```python
 # copy and pasted previous code - need update
 # graph references
 
