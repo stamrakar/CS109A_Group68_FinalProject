@@ -4,11 +4,6 @@ title: TestNotebook
 notebook: Final_Project_TestFile.ipynb
 ---
 
-## Contents
-{:.no_toc}
-*  
-{: toc}
-
 ```
 # for loading colab file
 # please delete before submission
