@@ -1,7 +1,3 @@
----
-nav_include: 3
----
-
 ## References
   * Stefan Wojcik, ["Bots in the Twittersphere"](http://www.pewinternet.org/2018/04/09/bots-in-the-twittersphere/)
   
