@@ -1,10 +1,10 @@
+---
+nav_include: 1
+title: Test Notebook
+notebook: Final_Project_TestFile.ipynb
+---
 
 ## Machine Learning Analysis for Twitter Bot Detection
-
-<img style="float: center; padding-right:" src="https://raw.githubusercontent.com/fayzantalpur/DS1-Twitter-Bot-Detection/master/Images%20and%20Graphs/Twitter_Bot_Image.png">
-
-  
-### CS109A: Harvard University, Fall 2018
 ### Final Project: Milestone 4 
 ### Contributors: Group #68: Nisrine Elhauz, Huan Liu, Fayzan Talpur, Samasara Tamrakar
 ___
