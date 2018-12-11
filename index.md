@@ -1,5 +1,4 @@
 ---
-nav_include: 1
 title: CS109A Data Science Final Project
 ---
 
