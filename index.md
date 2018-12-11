@@ -1,13 +1,12 @@
 ---
-title: Overview:
-notebook: 
-nav_include: 1
+title: CS109A FinalProject - Group #68
 ---
 
-### [EDA](/EDA.md)  | [References](/References.md) | [TestNotebook](/Final_Project_TestFile.md)
-
-
-### CS109A FinalProject - Group#68
+# CS109A Data Science Final Project
+## Project: Machine Learning & Analysis for Twitter Bot Detection 
+### Contributors: Group #68: Nisrine Elhauz, Huan Liu, Fayzan Talpur, Samasara Tamrakar 
+### Harvard University 
+### Fall 2018
 
 #### Objective: 
 
