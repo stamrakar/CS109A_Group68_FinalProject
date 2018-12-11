@@ -1,13 +1,12 @@
 
-<center><h1><i><b> Machine Learning Analysis for Twitter Bot Detection</b></i></h1></center>
+## Machine Learning Analysis for Twitter Bot Detection
 
-<center>
 <img style="float: center; padding-right:" src="https://raw.githubusercontent.com/fayzantalpur/DS1-Twitter-Bot-Detection/master/Images%20and%20Graphs/Twitter_Bot_Image.png">
-</center>
+
   
-<center> <i><b> CS109A: Harvard University, Fall 2018 </b></i> <center> 
-<center> <i><b> Final Project: Milestone 4 </b></i> <center>     
-<center> <i><b> Contributors: Group #68: Nisrine Elhauz, Huan Liu, Fayzan Talpur, Samasara Tamrakar </b></i> <center> 
+### CS109A: Harvard University, Fall 2018
+### Final Project: Milestone 4 
+### Contributors: Group #68: Nisrine Elhauz, Huan Liu, Fayzan Talpur, Samasara Tamrakar
 ___
 
 <a id ='TOC'></a>
