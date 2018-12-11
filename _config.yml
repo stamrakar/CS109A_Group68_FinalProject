@@ -2,3 +2,7 @@ theme: jekyll-theme-cayman
 title: CS109A FinalProject-Group68
 description: Machine Learning & Analysis for Twitter Bot Detection
 markdown: kramdown
+kramdown:
+    math_engine: mathjax
+    input: GFM
+    syntax_highlighter: rouge
