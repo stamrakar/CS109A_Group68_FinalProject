@@ -6,7 +6,7 @@ title: CS109A Data Science Final Project
 #### Contributors: Group #68: Nisrine Elhauz, Huan Liu, Fayzan Talpur, Samasara Tamrakar 
 #### Harvard University, Fall 2018
 
-<img style="float: center; padding-right:" src="https://raw.githubusercontent.com/fayzantalpur/DS1-Twitter-Bot-Detection/master/Images%20and%20Graphs/Twitter_Bot_Image.png" align="middle" width="280">
+<center><img style="float: center; padding-right:" src="https://raw.githubusercontent.com/fayzantalpur/DS1-Twitter-Bot-Detection/master/Images%20and%20Graphs/Twitter_Bot_Image.png" align="middle" width="280"></center>
 
 #### Objective: 
 
