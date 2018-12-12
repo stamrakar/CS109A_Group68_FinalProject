@@ -37,7 +37,7 @@ import pandas as pd
 
 We did not have a lot of data to train our models, good labelling mechanics to label our data, and most of the users were not bots. However, we were able to train models that performs better than random guessing using the base rate for bots vs non-bots in our samples.
 
-Our best model reached an accuracy of <mark>**94%**<mark>. <br/>
+Our best model reached an accuracy of <mark>94%<mark>. <br/>
 
 [Back to TOC](#TOC) <br/>
 <a id ='Summary-of-Results'></a>
