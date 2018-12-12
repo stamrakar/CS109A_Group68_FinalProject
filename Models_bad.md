@@ -1,8 +1,3 @@
----
-title: Models
-notebook: Models.ipynb
-nav_include: 2
----
 
 
 <a id ='TOC'></a>
