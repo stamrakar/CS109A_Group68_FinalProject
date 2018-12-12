@@ -1,14 +1,8 @@
-
-
-
-```
 ---
 title: CS109A Data Science Final Project
 notebook: Report-Homepage.ipynb
 nav_include: 1
 ---
-
-```
 
 
 
