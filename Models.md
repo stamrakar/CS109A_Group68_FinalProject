@@ -22,9 +22,7 @@ nav_include: 2
     4.13 [K-Means Clustering](#KMeans-Clustering) <br/>
     4.14 [Validate Botometer Results](#Validate-Botometer-Results) <br/>
     4.15 [Sentence Embeddings + Clutering + Neural Networks](#Sentence-Embeddings-Clutering-Neural-Networks)<br/>
-
 ___
-
 
 
 ```python
