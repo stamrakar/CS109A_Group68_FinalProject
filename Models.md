@@ -111,7 +111,7 @@ sns.set_context("poster")
 ### 4 - Models
 
 We splited train / test dataset by 0.25 and stratify by class_boto to ensure equal presentation of bots account in both datasets. The baseline accuracy of training dataset was 91.73%, the baseline accuracy for test set was 91.77%. Both of which are quite high. <br/>
-<mark> By testing several models, we were able to achieve an accuracy up to **94.4%**. </mark> 
+<mark> By testing several models, we were able to achieve an accuracy up to 94.4%. </mark> 
 
 
 
