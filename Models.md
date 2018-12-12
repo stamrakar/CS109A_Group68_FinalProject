@@ -5,7 +5,8 @@ nav_include: 2
 ---
 
 <a id ='TOC'></a>
-### Table of Contents <br/>
+#### Table of Contents
+
 4. [Models](#Models) <br/>
     4.1 [Baseline Model - Simple Linear Regression](#Baseline-Model) <br/>
     4.2 [Linear Regression with Ridge](#Linear-Regression-with-Ridge) <br/>
@@ -23,6 +24,8 @@ nav_include: 2
     4.14 [Validate Botometer Results](#Validate-Botometer-Results) <br/>
     4.15 [Sentence Embeddings + Clutering + Neural Networks](#Sentence-Embeddings-Clutering-Neural-Networks)<br/>
 ___
+
+
 
 
 ```python
