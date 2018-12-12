@@ -9,8 +9,7 @@ title: CS109A Data Science Final Project
 <center><img style="float: center; padding-right:" src="https://raw.githubusercontent.com/fayzantalpur/DS1-Twitter-Bot-Detection/master/Images%20and%20Graphs/Twitter_Bot_Image.png" width="280"></center>
 
 
-
-<center><img style="float: center; padding-right:" src="https://about.twitter.com/en_us/company/brand-resources.html" width="280"></center>
+![png](Twitter_Logo_Blue.png)
 
 #### Motivation: 
 
