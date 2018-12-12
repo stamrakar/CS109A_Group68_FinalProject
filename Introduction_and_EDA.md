@@ -4,29 +4,15 @@ notebook: Introduction_and_EDA.ipynb
 nav_include: 1
 ---
 
+
 <a id ='TOC'></a>
-#### Table of Contents
 
-1. [Introduction and Description of Data](#Introduction_Description_of_Data) <br/>
-    1.1 [Data](#Data) <br/>
-    1.2 [Data in Twitter API](#Data-in-Twitter-API) <br/>
-    1.3 [Collection of Data](#Collection-of-Data) <br/>
-    1.4 [Data Labelling: Using Botometer](#Labelling-Botometer) <br/>
-    1.5 [Data Labelling: Manually](#Labelling-Manual) <br/>
-    1.6 [Data Collection: Most Recent 200 Tweets per Each User](#Data-Collection-Recent) <br/>
-    1.7 [Description of Raw Data (Tweets)](#Description-of-Raw-Data) <br/>  
+## Contents
+{:.no_toc}
+*  
+{: toc}
 
-2. [Exploratory Data Analysis](#Exploratory-Data-Analysis) <br/>
-    2.1 [Data Wrangling & Cleansing](#Data-Wrangling-Cleansing) <br/>
-    2.2 [Feature Engineering](#Feature-Engineering)<br/>
-  > 2.2.1 [Feature Engineering - Tweet Features](#FE-Tweet-Features) <br/>
-  > 2.2.2 [Feature Engineering - User Features](#FE-User-Features)<br/>
-  > 2.2.3 [Feature Engineering - Finalize and Clean Up Data](#FE-Finalize-Clean)<br/>
-  
-   2.3 [Advanced Feature Engineering - NLP Features](#NLP-Features)<br/>
-   2.4 [Important Features](#Important-Features) <br/>
-   2.5 [Relations in Data](#Relations-in-Data) <br/>
-   2.6 [Standardization](#Standardization) <br/>   
+
 
 ___
 
