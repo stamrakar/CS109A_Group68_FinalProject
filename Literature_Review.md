@@ -15,6 +15,7 @@ nav_include: 4
 
 ___
 
+
 <a id ='Literature-Review-and-Related-Work'></a>
 ### 6 - Literature Review and Related Work
 
@@ -23,7 +24,7 @@ In general, many different classification models have been already developed ada
 
 [Back to TOC](#TOC) <br/>
 <a id ='Bots-in-the-Twittersphere'></a>
-#### 6.1 -Bots in the Twittersphere
+#### 6.1 - Bots in the Twittersphere
 
 Stefan Wojcik, ["Bots in the Twittersphere"](http://www.pewinternet.org/2018/04/09/bots-in-the-twittersphere/)
 
