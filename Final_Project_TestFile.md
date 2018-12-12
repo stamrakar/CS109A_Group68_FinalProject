@@ -1,9 +1,3 @@
----
-nav_include: 1
-title: Test Notebook
-notebook: Final_Project_TestFile.ipynb
----
-
 ## Machine Learning Analysis for Twitter Bot Detection
 ### Final Project: Milestone 4 
 ### Contributors: Group #68: Nisrine Elhauz, Huan Liu, Fayzan Talpur, Samasara Tamrakar
