@@ -1,7 +1,6 @@
 ---
 title: Introduction and EDA
-nav_include: 1
-notebook: Preliminary_EDA.ipynb
+nav_include: 2
 ---
 
 
