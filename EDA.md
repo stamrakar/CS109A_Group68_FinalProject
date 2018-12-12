@@ -1,12 +1,12 @@
 ---
 title: Introduction and EDA
-nav_include: 2
+nav_include: 1
 notebook: Preliminary_EDA.ipynb
 ---
 
 
   
-###  DATA
+###  Need to add nb 
 
 ...
 
