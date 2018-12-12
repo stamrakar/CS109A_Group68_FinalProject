@@ -8,7 +8,7 @@ nav_include: 2
 <a id ='TOC'></a>
 #### Table of Contents
 
-4. [Models](#Models) <br/>
+4 [Models](#Models) <br/>
     4.1 [Baseline Model - Simple Linear Regression](#Baseline-Model) <br/>
     4.2 [Linear Regression with Ridge](#Linear-Regression-with-Ridge) <br/>
     4.3 [Lasso](#Lasso) <br/>
