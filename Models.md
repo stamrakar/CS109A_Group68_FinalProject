@@ -4,10 +4,10 @@ notebook: Models.ipynb
 nav_include: 2
 ---
 
-
-{:.no_toc} *
+## Contents
+{:.no_toc}
+*  
 {: toc}
-
 
 ___
 
