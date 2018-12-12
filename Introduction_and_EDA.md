@@ -2637,12 +2637,6 @@ hist_plot(np.log(users_1['tweet_time_min'].values.clip(1, 1000)), 'log(tweets_mi
 
 
 
-![png](Introduction_and_EDA_files/Introduction_and_EDA_115_0.png)
-
-
-
-![png](Introduction_and_EDA_files/Introduction_and_EDA_115_1.png)
-
 
 It looks like both botometer-defined non-bot (botometer score < 0.2) and bots (botometer score >=0.2) are heavily screwed towards almost 0 seconds for minimum time interval between tweets of each users. Bots tend to have even more screwed minimum time interval towards 0. <br/>
 
