@@ -1,7 +1,7 @@
 ---
-nav_include: 2
 title: Test Notebook
 notebook: Testing_NB.ipynb
+nav_include: 3
 ---
 
 #### test notebook 
