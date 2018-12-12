@@ -1,8 +1,4 @@
----
-nav_include: 3
-title: Literature Review and Related Work
-notebook: Literature_Review.ipynb
----
+
 
 [Literature Review and Related Work](#Literature-Review-and-Related-Work) <br/>
 <a id ='TOC'></a>
