@@ -1,11 +1,13 @@
+---
+nav_include: 1
+title: Test Notebook
+notebook: Testing_NB.ipynb
+---
 
-# <img style="float: left; padding-right: 10px; width: 45px" src="https://raw.githubusercontent.com/Harvard-IACS/2018-CS109A/master/content/styles/iacs.png"> CS-109A Introduction to Data Science
-
-**Final Project - Milestone 4** <br/>
-**Project : Machine Learning & Analysis for Twitter Bot Detection** <br/>
-**Contributors: Group #68: Nisrine Elhauz, Huan Liu, Fayzan Talpur, Samasara Tamrakar** <br/>
-**Harvard University** <br/>
-**Fall 2018 ** 
+#### test notebook 
+## Machine Learning Analysis for Twitter Bot Detection
+### Final Project: Milestone 4 
+### Contributors: Group #68: Nisrine Elhauz, Huan Liu, Fayzan Talpur, Samasara Tamrakar
 
 ___
 
