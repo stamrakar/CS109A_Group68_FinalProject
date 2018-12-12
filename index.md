@@ -6,8 +6,10 @@ title: CS109A Data Science Final Project
 #### Contributors: Group #68: Nisrine Elhauz, Huan Liu, Fayzan Talpur, Samasara Tamrakar 
 #### Harvard University, Fall 2018
 
-
 ![Image Text](https://i.ibb.co/KDd8fKN/Twitter-Logo-Blue.png)
+
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/KDd8fKN/Twitter-Logo-Blue.png" alt="Twitter-Logo-Blue" border="0" /></a>
+
 
 #### Motivation: 
 
