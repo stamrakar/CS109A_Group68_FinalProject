@@ -1,3 +1,8 @@
+---
+title: Introduction and EDA
+notebook: Introduction_and_EDA.ipynb
+nav_include: 2
+---
 
 # Introduction and EDA
 
@@ -34,9 +39,7 @@ ___
 The main objective of the project is explore twitter dataset using twitter API and try to create a learning algorithim that can differentiate between bot and human Twitter account.
 
 
-
-```
-#@title 
+```python
 # Import Libraries, Global Options and Styles
 import requests
 from IPython.core.display import HTML
@@ -164,7 +167,7 @@ We used keywords of more controversial topics as those are more likely to have n
 
 
 
-```
+```python
 # http://www.tweepy.org/
 import tweepy
 
@@ -181,7 +184,7 @@ if (not api):
 
 
 
-```
+```python
 # The following code was adapted from sample code provided by TFs / Profs for this project
 
 def collect_tweets(maxTs, requestCount, filename):
@@ -248,7 +251,8 @@ def collect_tweets(maxTs, requestCount, filename):
 
 
 
-```
+
+```python
 # collect samples (which we will use botometer to encode)
 collect_tweets(7000, 70, 'immigration_brexit_bitcoin_extended.json')
 ```
@@ -256,7 +260,7 @@ collect_tweets(7000, 70, 'immigration_brexit_bitcoin_extended.json')
 
 
 
-```
+```python
 # load the file
 raw_df = pd.read_json('immigration_brexit_bitcoin_extended.json', lines=True)
 ```
@@ -264,7 +268,7 @@ raw_df = pd.read_json('immigration_brexit_bitcoin_extended.json', lines=True)
 
 
 
-```
+```python
 # take a look at the separate data
 display(raw_df.shape)
 ```
@@ -272,7 +276,7 @@ display(raw_df.shape)
 
 
 
-```
+```python
 # take a look at the combined data
 display(raw_df.columns.values()
 display(raw_df.shape)
@@ -281,7 +285,7 @@ display(raw_df.shape)
 
 
 
-```
+```python
 # delete duplicate accounts
 raw_df = raw_df.drop_duplicates(subset='id_str')
 raw_df.shape
@@ -290,7 +294,7 @@ raw_df.shape
 
 
 
-```
+```python
 # save as csv
 raw_df.to_csv('immigration_brexit_bitcoin_full.csv')
 
@@ -307,7 +311,7 @@ We labelled each account using botometer score via Botometer API.
 
 
 
-```
+```python
 #load the data
 raw_df = pd.read_json('immigration_brexit_bitcoin_full.json')
 raw_df.shape
@@ -323,7 +327,7 @@ raw_df.shape
 
 
 
-```
+```python
 # add account id to dataframe
 raw_df['id'] = raw_df['user'].map(lambda d: d['id'])
 ```
@@ -331,7 +335,7 @@ raw_df['id'] = raw_df['user'].map(lambda d: d['id'])
 
 
 
-```
+```python
 # set up botometer
 # the code below was adapted from 
 # https://github.com/IUNetSci/botometer-python
@@ -354,7 +358,7 @@ bom = botometer.Botometer(wait_on_ratelimit=True,
 
 
 
-```
+```python
 # retrieve response objects from Botometer
 botometer_results = {}
 count = 0
@@ -373,7 +377,7 @@ for index, user_id in raw_df['id'][.iteritems():
 
 
 
-```
+```python
 raw_df['botometer_result'].dropna().shape
 ```
 
@@ -387,7 +391,7 @@ raw_df['botometer_result'].dropna().shape
 
 
 
-```
+```python
 # convert to series
 botometer_series = pd.Series(botometer_results)
 ```
@@ -395,7 +399,7 @@ botometer_series = pd.Series(botometer_results)
 
 
 
-```
+```python
 # add results to a new column
 raw_df['botometer_result'] = botometer_series
 ```
@@ -403,7 +407,7 @@ raw_df['botometer_result'] = botometer_series
 
 
 
-```
+```python
 # extract universal score (botometer score)
 raw_df['boto_univ'] = raw_df['botometer_result'].map(lambda s: s['cap']['universal'])
 raw_df['boto_univ'].describe()
@@ -427,7 +431,7 @@ raw_df['boto_univ'].describe()
 
 
 
-```
+```python
 # encode bot / non-bot via score of 0.2 threshold
 # we chose 0.2 threshold instead of 0.5 as we quickly verify the botometer results, and found many of the accounts with less than 0.5 are still bots
 threshold = 0.2
@@ -437,7 +441,7 @@ raw_df['class_boto'] = np.where(raw_df['boto_univ']>threshold, 1, 0)
 
 
 
-```
+```python
 # examine number of 'bots' as identified by Botometer
 sum(raw_df['class_boto'])
 ```
@@ -452,7 +456,7 @@ sum(raw_df['class_boto'])
 
 
 
-```
+```python
 # save as csv
 raw_df.to_csv('immigration_brexit_bitcoin_full_boto.csv')
 
@@ -479,7 +483,7 @@ We keep manually identifying bots / non-bots account, and only record the ones w
 
 
 
-```
+```python
 # load the data
 raw_df = pd.read_json('immigration_brexit_bitcoin_full_boto.json')
 raw_df.shape
@@ -495,7 +499,7 @@ raw_df.shape
 
 
 
-```
+```python
 # to verify each user, we only need "screen_name"
 raw_df['screen_name'] = raw_df['user'].map(lambda d: d['screen_name'])
 ```
@@ -503,7 +507,7 @@ raw_df['screen_name'] = raw_df['user'].map(lambda d: d['screen_name'])
 
 
 
-```
+```python
 # form a simple dataframe with only screen_name and Botometer score for references (so we can manually verify accounts)
 # create 'class_verified for verified score'
 raw_df_verify = raw_df.loc[:,['screen_name', 'class_verified']]
@@ -512,7 +516,7 @@ raw_df_verify = raw_df.loc[:,['screen_name', 'class_verified']]
 
 
 
-```
+```python
 # save as csv (so we can manually verify and input results in excel)
 raw_df_verify.to_csv('to_verify.csv')
 ```
@@ -520,7 +524,7 @@ raw_df_verify.to_csv('to_verify.csv')
 
 
 
-```
+```python
 # we manually verified 40 accounts by searching screen_name, view the user's previous tweets, profiles, etc.
 # we recorded in the cvs as 1(bot) and 0(non-bot), and only recorded the accounts that we feel certain about
 # we kept searching until reach 20 bots and 20 users
@@ -530,7 +534,7 @@ verify_df =pd. read_csv('boto_verify.csv')
 
 
 
-```
+```python
 users_list = verify_df.loc[verify_df['class_verified']==0]
 bots_list = verify_df.loc[verify_df['class_verified']==1]
 ```
@@ -538,7 +542,7 @@ bots_list = verify_df.loc[verify_df['class_verified']==1]
 
 
 
-```
+```python
 display(users_list.shape)
 display(bots_list.shape)
 ```
@@ -552,7 +556,7 @@ For each of the 6032 accounts we identified, we requested users' most recent 200
 
 
 
-```
+```python
 # read the verified dataframe
 raw_df = pd.read_json('immigration_brexit_bitcoin_full_boto.json')
 raw_df.shape
@@ -568,7 +572,7 @@ raw_df.shape
 
 
 
-```
+```python
 #names = raw_df['screen_name'].tolist()
 names = raw_df[raw_df['botometer_result'].notnull()]['user'].map(lambda u: u['screen_name']).tolist()
 ```
@@ -576,7 +580,7 @@ names = raw_df[raw_df['botometer_result'].notnull()]['user'].map(lambda u: u['sc
 
 
 
-```
+```python
 len(names)
 ```
 
@@ -590,7 +594,7 @@ len(names)
 
 
 
-```
+```python
 def get_tweets(names, fName, t_count, verify_df):
     # INPUT:
     # names: list of screen_name
@@ -626,7 +630,7 @@ def get_tweets(names, fName, t_count, verify_df):
 
 
 
-```
+```python
 # get max 200 tweets for each user
 get_tweets(names=names, fName='tweets.json', t_count=200, verify_df=raw_df) #the fName and corresponding data will be updated later
 ```
@@ -634,7 +638,7 @@ get_tweets(names=names, fName='tweets.json', t_count=200, verify_df=raw_df) #the
 
 
 
-```
+```python
 # read the data
 tweets_df = pd.read_json('tweets.json', lines=True)
 ```
@@ -642,7 +646,7 @@ tweets_df = pd.read_json('tweets.json', lines=True)
 
 
 
-```
+```python
 tweets_df.columns.values
 ```
 
@@ -703,7 +707,7 @@ First, we parsed features, only inlude the features with value, and drop feature
 
 
 
-```
+```python
 # read the dataset
 tweets_df = pd.read_json('tweets.json', lines=True)
 ```
@@ -711,7 +715,7 @@ tweets_df = pd.read_json('tweets.json', lines=True)
 
 
 
-```
+```python
 # first we want to reduce columns by dropping the features that miss data more than 50% of the time
 threshold = len(tweets_df.columns.values)*0.5
 tweets_df = tweets_df.dropna(thresh = threshold, axis='columns')
@@ -720,7 +724,7 @@ tweets_df = tweets_df.dropna(thresh = threshold, axis='columns')
 
 
 
-```
+```python
 # take a look at the shape
 tweets_df.shape
 ```
@@ -735,7 +739,7 @@ tweets_df.shape
 
 
 
-```
+```python
 # explode 'entities', 'user'
 # although it would be interesting to see 'retweeted_status', it might be a bit too complicated
 # especially when the # of reweets of the retweeted post is availabel directly ('retweet_count')
@@ -752,7 +756,7 @@ def explode(df):
 
 
 
-```
+```python
 # parse
 tweets_df = explode(tweets_df)
 ```
@@ -760,7 +764,7 @@ tweets_df = explode(tweets_df)
 
 
 
-```
+```python
 # heatmap to visualize the missing data in different columns
 sns.set(style="darkgrid")
 sns.set_context("poster")
@@ -780,8 +784,7 @@ def get_heatmap(df, imgName='NaN_heatmap.png'):
 
 
 
-
-```
+```python
 #plotting first null values
 get_heatmap(tweets_df.ix[:,0:21], imgName='NaN_heatmap_col0_20.png')
 ```
@@ -793,7 +796,7 @@ get_heatmap(tweets_df.ix[:,0:21], imgName='NaN_heatmap_col0_20.png')
 
 
 
-```
+```python
 # drop empty columns again (after exploding 'user' and 'entities')
 threshold = len(tweets_df.columns.values)*0.5
 tweets_df = tweets_df.dropna(thresh = threshold, axis='columns')
@@ -802,7 +805,7 @@ tweets_df = tweets_df.dropna(thresh = threshold, axis='columns')
 
 
 
-```
+```python
 # take a look at the columns left
 display(len(tweets_df.columns.values))
 display(tweets_df.columns.values)
@@ -843,7 +846,7 @@ display(tweets_df.columns.values)
 
 
 
-```
+```python
 # we only interested in english tweets
 tweets_df_en = tweets_df.loc[tweets_df['lang']=='en']
 tweets_df_en.shape
@@ -859,7 +862,7 @@ tweets_df_en.shape
 
 
 
-```
+```python
 # duplicated / no longer userful columns
 col_duplicate = ['entities','user', 'lang', 'user_lang', 'user_id', 'user_id_str', 'id_str']
 # we dropped 'lang' as we only use english accounts for our dataset
@@ -873,7 +876,7 @@ col_not_interested = ['user_entities']
 
 
 
-```
+```python
 # drop duplicated columns and columns that we are not interested
 tweets_df_en = tweets_df_en.drop(columns= (col_duplicate + col_not_interested))
 ```
@@ -881,7 +884,7 @@ tweets_df_en = tweets_df_en.drop(columns= (col_duplicate + col_not_interested))
 
 
 
-```
+```python
 # take a look at shape
 tweets_df_en.shape
 ```
@@ -896,7 +899,7 @@ tweets_df_en.shape
 
 
 
-```
+```python
 # save as json
 tweets_df_en.to_json('tweets_clean.json')
 ```
@@ -909,7 +912,7 @@ Next, we want to aggregate tweet features to the accounts.
 
 
 
-```
+```python
 # read previous json file
 tweets_df = pd.read_json('tweets_clean.json')
 ```
@@ -925,7 +928,7 @@ We want to create the following features to prepare for NLP feature engineering 
 
 
 
-```
+```python
 # although using tweet_mode='extended', we are still not getting the full text
 # therefore, we tried to get full_text from retweeted_status
 tweets_df['text_rt'] = tweets_df['retweeted_status'].map(lambda x: x['full_text'] if x and (not isinstance(x, float)) and ('full_text' in x) else None)
@@ -993,7 +996,7 @@ tweets_df[['text_tweet', 'text_rt']].head(5)
 
 
 
-```
+```python
 # take a look at retweets
 tweets_df[['text_tweet', 'text_rt']][tweets_df['text_rt'].map(lambda s: s is not None)].head()
 ```
@@ -1058,7 +1061,7 @@ tweets_df[['text_tweet', 'text_rt']][tweets_df['text_rt'].map(lambda s: s is not
 
 
 
-```
+```python
 # encode tweet features
 
 # 1 = favorited - True; 0 = favorited - False
@@ -1081,7 +1084,7 @@ for f in ['user_favourites_count', 'user_followers_count', 'user_friends_count']
 
 
 
-```
+```python
 tweets_df.shape
 ```
 
@@ -1104,7 +1107,7 @@ As we suspected bots tweet more frequently / have different tweeting pattern fro
 
 
 
-```
+```python
 # extract
 tweets_df['screen_name'] = tweets_df['user_screen_name']
 ```
@@ -1112,7 +1115,7 @@ tweets_df['screen_name'] = tweets_df['user_screen_name']
 
 
 
-```
+```python
 # account feature engineering
 # create an intermedium df with all account-related data from tweets
 
@@ -1123,7 +1126,7 @@ users_description_len_df['user_description_len'] = users_description_len_df['use
 
 
 
-```
+```python
 # account feature engineering
 # get tweets interval stats (in seconds)
 
@@ -1214,7 +1217,7 @@ tweet_time_stats_df.head()
 
 
 
-```
+```python
 # account feature engineering
 # get account age (in seconds)
 
@@ -1285,7 +1288,7 @@ user_account_age_df.head()
 
 
 
-```
+```python
 # account feature engineering
 # create a new dataframe with engineered features that are associated with each user
 users_df = pd.DataFrame(tweets_df['screen_name']).drop_duplicates(subset='screen_name')
@@ -1385,7 +1388,7 @@ users_df.head(5)
 
 
 
-```
+```python
 # read the dataset with botometer score
 boto_df = pd.read_json('immigration_brexit_bitcoin_full_boto.json')
 boto_df['screen_name'] = boto_df['user'].map(lambda u: u['screen_name'])
@@ -1394,7 +1397,7 @@ boto_df['screen_name'] = boto_df['user'].map(lambda u: u['screen_name'])
 
 
 
-```
+```python
 # add botometer back
 boto_class_df = boto_df[['class_boto','screen_name']].drop_duplicates(subset='screen_name')
 tweets_df = pd.merge(tweets_df, boto_class_df, left_on='screen_name', right_on='screen_name')
@@ -1435,7 +1438,7 @@ tweets_df.columns.values
 
 
 
-```
+```python
 # merge the account information back to the dataset
 tweets_df = pd.merge(tweets_df, users_df, left_on='screen_name', right_on='screen_name')
 tweets_df.columns.values
@@ -1482,7 +1485,7 @@ We want to cealnup the data by dropping the columns that are no longer interesti
 
 
 
-```
+```python
 # delete columns that no longer useful
 col_del = ['display_text_range', 'in_reply_to_status_id_str', 'in_reply_to_user_id_str','in_reply_to_status_id', 
            'in_reply_to_user_id', 'is_quote_status', 'quoted_status', 'quoted_status_id', 'quoted_status_id_str',
@@ -1502,7 +1505,7 @@ tweets_df = tweets_df.drop(columns=col_del, axis=1)
 
 
 
-```
+```python
 tweets_df.dtypes
 ```
 
@@ -1539,7 +1542,7 @@ tweets_df.dtypes
 
 
 
-```
+```python
 # check user_verified
 display(tweets_df.shape)
 display(tweets_df[tweets_df['user_verified'].isnull()].shape)
@@ -1556,7 +1559,7 @@ display(tweets_df[tweets_df['user_verified'].isnull()].shape)
 
 
 
-```
+```python
 # as it is mostly None, we decided to delete this column
 del tweets_df['user_verified']
 ```
@@ -1564,7 +1567,7 @@ del tweets_df['user_verified']
 
 
 
-```
+```python
 display(tweets_df.columns.values)
 display(tweets_df.shape)
 ```
@@ -1586,7 +1589,7 @@ display(tweets_df.shape)
 
 
 
-```
+```python
 tweets_df.describe()
 ```
 
@@ -1809,7 +1812,7 @@ tweets_df.describe()
 
 
 
-```
+```python
 # create list of columns names for different categories and see if we have missed anything
 col_response = ['class_boto']
 col_pred_text = list(tweets_df.select_dtypes(['object']).columns.values)
@@ -1820,7 +1823,7 @@ col_pred_numerical = list(tweets_df.select_dtypes(['float64', 'int64']).drop(col
 
 
 
-```
+```python
 # take a look at numerical features
 display(col_pred_numerical)
 ```
@@ -1847,7 +1850,7 @@ display(col_pred_numerical)
 
 
 
-```
+```python
 # take a look at text features
 display(col_pred_text)
 ```
@@ -1859,7 +1862,7 @@ display(col_pred_text)
 
 
 
-```
+```python
 # delete numerical columns that have mean or std equals 0 (which implies same values for the columns)
 col_name_del = []
 for col in col_pred_numerical:
@@ -1881,7 +1884,7 @@ print ('{} are deleted as they only have one values across all the rows.'.format
 
 
 
-```
+```python
 # before saving the file, we want to delete any rows with NaN values from the new columns
 col_w_nan = tweets_df.columns[tweets_df.isna().any()].tolist()
 col_w_nan
@@ -1903,7 +1906,7 @@ col_w_nan
 
 
 
-```
+```python
 # while it is okay to have NaN in texts, we want to delete the rows with NaN Values in the tweet_time related columns
 tweets_df = tweets_df.dropna(axis=0, subset=['tweet_time_mean', 'tweet_time_std', 'tweet_time_min', 'tweet_time_max'])
 display(tweets_df.shape)
@@ -1941,7 +1944,7 @@ display(tweets_df.isna().any())
 
 
 
-```
+```python
 # great! let's save as json
 users_df.to_json('users.json')
 tweets_df.to_json('tweets_clean_final.json')
@@ -1956,7 +1959,7 @@ After cleaning up the file and did some feature engineering, we tried to create 
 
 
 
-```
+```python
 # read the data
 tweets_df = pd.read_json('tweets_clean_final.json')
 users_df = pd.read_json('users.json')
@@ -1965,7 +1968,7 @@ users_df = pd.read_json('users.json')
 
 
 
-```
+```python
 col_nlp_text = ['tweet_len_mean', 'tweet_len_std', 'tweet_word_mean', 'tweet_word_std',
                 'retweet_len_mean', 'retweet_len_std', 'retweet_word_mean', 'retweet_word_std']
 
@@ -1977,7 +1980,7 @@ with open('col_nlp_text.txt', 'w') as fp:
 
 
 
-```
+```python
 # function to get tweet length
 def get_tweet_lens(tweet_series):
     return tweet_series.dropna().map(lambda s: len(s))
@@ -1986,7 +1989,7 @@ def get_tweet_lens(tweet_series):
 
 
 
-```
+```python
 # function to get length of each word. filtering out hashtags, @, and links
 def get_tweet_word_lens(tweet_series):
     tweets = tweet_series.dropna().values.tolist()
@@ -1999,7 +2002,7 @@ def get_tweet_word_lens(tweet_series):
 
 
 
-```
+```python
 # function to create feature
 def tweet_text_features(df):
     cols = col_nlp_text
@@ -2017,7 +2020,7 @@ def tweet_text_features(df):
 
 
 
-```
+```python
 # get text features
 text_df = tweets_df.groupby("screen_name").apply(tweet_text_features).reset_index()
 ```
@@ -2025,7 +2028,7 @@ text_df = tweets_df.groupby("screen_name").apply(tweet_text_features).reset_inde
 
 
 
-```
+```python
 # merge text features with tweets_df
 tweets_df = pd.merge(tweets_df, text_df, left_on='screen_name', right_on='screen_name')
 ```
@@ -2033,7 +2036,7 @@ tweets_df = pd.merge(tweets_df, text_df, left_on='screen_name', right_on='screen
 
 
 
-```
+```python
 display(tweets_df.shape)
 display(tweets_df.columns.values)
 ```
@@ -2058,7 +2061,7 @@ display(tweets_df.columns.values)
 
 
 
-```
+```python
 users_df.shape
 ```
 
@@ -2072,7 +2075,7 @@ users_df.shape
 
 
 
-```
+```python
 # merge text features with uers_df
 users_df = pd.merge(users_df, text_df, left_on='screen_name', right_on='screen_name')
 ```
@@ -2080,7 +2083,7 @@ users_df = pd.merge(users_df, text_df, left_on='screen_name', right_on='screen_n
 
 
 
-```
+```python
 # clean up users_df a bit and join boto scores
 users_df = pd.merge(users_df, tweets_df[['class_boto', 'screen_name']], left_on='screen_name', right_on='screen_name')
 users_df = users_df.drop_duplicates(subset='screen_name')
@@ -2089,7 +2092,7 @@ users_df = users_df.drop_duplicates(subset='screen_name')
 
 
 
-```
+```python
 # great! let's save as json-again
 users_df.to_json('users_final.json')
 tweets_df.to_json('tweets_clean_final2.json')
@@ -2106,7 +2109,7 @@ We also want to explore the relationship among account-level features we have se
 
 
 
-```
+```python
 # read the data
 tweets_df = pd.read_json('tweets_clean_final2.json')
 ```
@@ -2114,7 +2117,7 @@ tweets_df = pd.read_json('tweets_clean_final2.json')
 
 
 
-```
+```python
 # separte bots and non-bots tweets for easy plotting
 tweets_0 = tweets_df.loc[tweets_df['class_boto']==0]
 tweets_1 = tweets_df.loc[tweets_df['class_boto']==1]
@@ -2123,7 +2126,7 @@ tweets_1 = tweets_df.loc[tweets_df['class_boto']==1]
 
 
 
-```
+```python
 # read the user dataframe
 users_df = pd.read_json('users_final.json')
 ```
@@ -2131,7 +2134,7 @@ users_df = pd.read_json('users_final.json')
 
 
 
-```
+```python
 # separte bots and non-bots accounts for easy plotting
 users_0 = users_df.loc[users_df['class_boto']==0]
 users_1 = users_df.loc[users_df['class_boto']==1]
@@ -2142,7 +2145,7 @@ Let's examine the data. We removed "screen_name" from showing in the dataframe f
 
 
 
-```
+```python
 # examine the tweets data
 # we drop screen_name for privacy
 tweets_df.drop(columns=['screen_name']).head(5)
@@ -2358,7 +2361,7 @@ tweets_df.drop(columns=['screen_name']).head(5)
 
 
 
-```
+```python
 # examine the users data
 # we drop screen_name for privacy
 users_df.drop(columns=['screen_name']).head(5)
@@ -2574,7 +2577,7 @@ users_df.drop(columns=['screen_name']).head(5)
 
 
 
-```
+```python
 # scatter plot
 def scatterplot (col_b1, col_b2, col_r1, col_r2, col1, col2):
     plt.scatter(col_b1, col_b2, s=5, color='salmon', label='bot', alpha=0.75)
@@ -2592,7 +2595,7 @@ def scatterplot (col_b1, col_b2, col_r1, col_r2, col1, col2):
 
 
 
-```
+```python
 # scatter plot2
 def scatterplot2 (col_b1, col_b2, col_r1, col_r2, col1, col2):
     plt.scatter(col_b1, col_b2, s=3, color='salmon', label='bot', alpha=0.0025)
@@ -2610,7 +2613,7 @@ def scatterplot2 (col_b1, col_b2, col_r1, col_r2, col1, col2):
 
 
 
-```
+```python
 # histogram
 def hist_plot(col, xlabel, ylabel, title):
     #values = col.values[~np.isnan(col.values)]
@@ -2626,7 +2629,7 @@ def hist_plot(col, xlabel, ylabel, title):
 
 
 
-```
+```python
 # quick plots
 plt.figure(figsize=(6,4))
 hist_plot(np.log(users_0['tweet_time_min'].values.clip(1, 1000)), 'log(tweets_min_time_interval)','count', 'min time interval among all tweets for each NON-BOT in seconds')
@@ -2649,7 +2652,7 @@ The botometer-identified bots also have heavily screwed minimim tweet time inter
 
 
 
-```
+```python
 fig, ax = plt.subplots(2,1, figsize=(20,12))
 fig.suptitle("Min Tweet Time Interval for Each Account In (Log Seconds) \n for Bot and Non-Bots", fontsize=25)
 
@@ -2677,7 +2680,7 @@ From the plot above, it seems like bots tend to have more large min tweets inter
 
 
 
-```
+```python
 # quick plots
 plt.figure(figsize=(6,4))
 hist_plot(np.log(users_0['account_age'].values.clip(0,1000000000)), 'account age (seconds)','count', 'account age of all tweets for for each NON-BOT')
@@ -2696,7 +2699,7 @@ hist_plot(np.log(users_1['account_age'].values.clip(0,1000000000)), 'account age
 
 
 
-```
+```python
 fig, ax = plt.subplots(2,1, figsize=(20,12))
 fig.suptitle("Account Age in (Log Seconds) of Each Account\n for Bot and Non-Bots", fontsize=25)
 
@@ -2724,7 +2727,7 @@ While the account age for non-bot accounts looks continuous, the account_age for
 
 
 
-```
+```python
 # quick plots
 plt.figure(figsize=(10,6))
 scatterplot(np.log(users_1['account_age'].values.clip(0,1000000000)), np.log(users_1['tweet_time_min'].values.clip(1, 1000)),
@@ -2741,7 +2744,7 @@ Given the tweets are the most recent 200 tweets from each account, it looks like
 
 
 
-```
+```python
 # quick plots
 plt.figure(figsize=(10,6))
 scatterplot2(np.log(tweets_1['user_followers_count'].values.clip(0,1000000000)), tweets_1['retweet_count'].values.clip(0,150),
@@ -2763,7 +2766,7 @@ Last step before wrapping up the preprocessing, we want to explore the correlati
 
 
 
-```
+```python
 # correlation matrix
 # quick look at some features we might be interested in
 
@@ -2783,7 +2786,7 @@ ax.set_yticklabels([''] + labels_corr);
 
 
 
-```
+```python
 # correlation matrix 
 pd.DataFrame(users_df[col_corr].corr())
 ```
@@ -2846,7 +2849,7 @@ We also want to look at the common words / topics of each account among their mo
 
 
 
-```
+```python
 def clean_str(string):
     string = re.sub(r"[^A-Za-z0-9(),!?\'\`]", " ", string)
     string = re.sub(r"\'s", " \'s", string)
@@ -2871,7 +2874,7 @@ def clean_str(string):
 
 
 
-```
+```python
 def generate_wordCloud(text, title):
     stopwords = set(STOPWORDS)
     extra_stopwords = {'one', 'al','et', 'br', 'Po', 'th', 'sayi', 'fr','wi', 'Unknown','co',
@@ -2894,7 +2897,7 @@ def generate_wordCloud(text, title):
 
 
 
-```
+```python
 bot_tweets_str = ""
 nonbot_tweets_str = ""
 
@@ -2912,7 +2915,7 @@ dataset_0=df0[df0.text_tweet.notnull()]
 
 
 
-```
+```python
 # take a look at the first 10 tweets
 display(dataset_0[0:10])
 ```
@@ -2988,7 +2991,7 @@ display(dataset_0[0:10])
 
 
 
-```
+```python
 for tweet in  dataset_1.text_tweet[0:10]:
     bot_tweets_str = bot_tweets_str+ dataset_1.text_tweet.replace('NaN','')
     
@@ -3000,13 +3003,18 @@ for tweet in  dataset_0.text_tweet[0:10]:
 
 
 
-```
+```python
 # to download : conda install -c conda-forge wordcloud or pip install wordcloud
 from wordcloud import WordCloud
 
 generate_wordCloud(bot_tweets_str,'Bot')
 generate_wordCloud(nonbot_tweets_str,'Non-Bot')
 ```
+
+
+![png](Introduction_and_EDA_files/wordCloud_bot.png)
+
+![png](Introduction_and_EDA_files/wordCloud_non_bot.png)
 
 
 [Back to TOC](#TOC) <br/>
@@ -3022,7 +3030,8 @@ As the last step of the EDA and data preprocessing, we consolidated all our acco
 
 
 
-```
+
+```python
 # read the data
 users_df = pd.read_json('users_final.json')
 ```
@@ -3030,7 +3039,8 @@ users_df = pd.read_json('users_final.json')
 
 
 
-```
+
+```python
 users_df.columns.values
 ```
 
@@ -3053,7 +3063,8 @@ users_df.columns.values
 
 
 
-```
+
+```python
 # we want to check how many accounts have left after all the cleansing
 users_df.shape
 ```
@@ -3068,7 +3079,8 @@ users_df.shape
 
 
 
-```
+
+```python
 display(users_df.columns.values)
 display(users_df.shape)
 ```
@@ -3095,7 +3107,8 @@ We still have 28 columns, which include two reference columns ('id' and 'screen_
 
 
 
-```
+
+```python
 users_df.dtypes
 ```
 
@@ -3137,7 +3150,8 @@ users_df.dtypes
 
 
 
-```
+
+```python
 # separate numerical columns and text columns again
 col_response = ['class_boto']
 col_pred_text = list(users_df.select_dtypes(['object']).drop(columns=['screen_name']).columns.values)
@@ -3148,7 +3162,8 @@ col_pred_numerical = list(users_df.select_dtypes(['float64', 'int64']).drop(colu
 
 
 
-```
+
+```python
 # save the column lists
 c_list_names = ['col_pred_numerical', 'col_ref', 'col_response', 'col_pred_text']
 c_list = [col_pred_numerical, col_ref, col_response, col_pred_text]
@@ -3161,7 +3176,8 @@ for c_name, c in zip(c_list_names, c_list):
 
 
 
-```
+
+```python
 display(users_df.shape)
 display(users_df.isna().any())
 ```
@@ -3205,7 +3221,8 @@ display(users_df.isna().any())
 
 
 
-```
+
+```python
 # cleaning up NaN on numerical columns by assigning them 0
 users_df[col_pred_numerical] = users_df[col_pred_numerical].fillna(0)
 ```
@@ -3213,7 +3230,8 @@ users_df[col_pred_numerical] = users_df[col_pred_numerical].fillna(0)
 
 
 
-```
+
+```python
 from sklearn import preprocessing
 
 def standardize(df):
@@ -3225,7 +3243,8 @@ def standardize(df):
 
 
 
-```
+
+```python
 # create a new copy with numercial columns standardized
 users_df[col_pred_numerical] = standardize(users_df[col_pred_numerical])
 ```
@@ -3233,7 +3252,8 @@ users_df[col_pred_numerical] = standardize(users_df[col_pred_numerical])
 
 
 
-```
+
+```python
 # check if the copy 
 display(users_df.describe())
 display(users_df.shape)
@@ -3513,7 +3533,8 @@ display(users_df.shape)
 
 
 
-```
+
+```python
 # save to json
 users_df.to_json('users_final_std.json')
 ```
