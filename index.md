@@ -7,7 +7,7 @@ title: CS109A Data Science Final Project
 #### Harvard University, Fall 2018
 
 
-![png](Introduction_and_EDA_files/Twitter_Logo_Blue.png)
+![Image Text](https://i.ibb.co/KDd8fKN/Twitter-Logo-Blue.png)
 
 #### Motivation: 
 
