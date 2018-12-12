@@ -5,13 +5,12 @@ nav_include: 4
 ---
 
 <a id ='TOC'></a>
-#### Table of Contents
-6. [Literature Review and Related Work](#Literature-Review-and-Related-Work) <br/>
-    6.1 [Bots in the Twittersphere](#Bots-in-the-Twittersphere) <br/>
-    6.2 [How Twitter Bots Help Fuel Political Feuds](#How-Twitter-Bots-Help-Fuel-Political-Feuds) <br/>
-    6.3 [The spread of low-credibility content by social bots](#The-spread-of-low-credibility-content-by-social-bots) <br/>
-    6.4 [Twitter Topic Modeling by Tweet Aggregation](#Twitter-Topic-Modeling-by-Tweet-Aggregation) <br/>
-    6.5 [Additional Sources](#Additional-Sources) <br/>
+
+## Contents
+{:.no_toc}
+*  
+{: toc}
+
 
 ___
 
