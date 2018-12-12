@@ -10,6 +10,7 @@ title: CS109A Data Science Final Project
 
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/KDd8fKN/Twitter-Logo-Blue.png" alt="Twitter-Logo-Blue" border="0" /></a>
 
+![Image Text](https://cfcdnpull-creativefreedoml.netdna-ssl.com/wp-content/uploads/2017/06/Twitter-logo-2012.png)
 
 #### Motivation: 
 
