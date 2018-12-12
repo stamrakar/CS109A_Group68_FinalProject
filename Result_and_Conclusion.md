@@ -4,12 +4,15 @@ notebook: Result_and_Conclusion.ipynb
 nav_include: 3
 ---
 
+
 <a id ='TOC'></a>
-### Table of Contents
-5. [Results and Conclusion](#Results-and-Conclusion) <br/>
-    5.1 [Summary of Results](#Summary-of-Results) <br/>
-    5.2 [Noteworthy Findings](#Noteworthy-Findings) <br/>
-    5.3 [Conclusion and Future Work](#Conclusion-and-Future-Work) <br/>
+
+## Contents
+{:.no_toc}
+*  
+{: toc}
+
+
 
 ___
 
