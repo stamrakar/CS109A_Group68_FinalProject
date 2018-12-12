@@ -1,9 +1,3 @@
----
-title: CS109A Data Science Final Project
-notebook: Report-Homepage.ipynb
-nav_include: 1
----
-
 
 
 ### Machine Learning & Analysis for Twitter Bot Detection 
