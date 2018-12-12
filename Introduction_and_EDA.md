@@ -4,8 +4,6 @@ notebook: Introduction_and_EDA.ipynb
 nav_include: 2
 ---
 
-# Introduction and EDA
-
 <a id ='TOC'></a>
 #### Table of Contents
 
