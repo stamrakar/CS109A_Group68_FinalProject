@@ -104,9 +104,6 @@ sns.set_context("poster")
 ```
 
 
-    Using TensorFlow backend.
-    /anaconda3/lib/python3.6/site-packages/seaborn/apionly.py:6: UserWarning: As seaborn no longer sets a default style on import, the seaborn.apionly module is deprecated. It will be removed in a future version.
-      warnings.warn(msg, UserWarning)
 
 
 [Back to TOC](#TOC) <br/>
@@ -114,7 +111,7 @@ sns.set_context("poster")
 ### 4 - Models
 
 We splited train / test dataset by 0.25 and stratify by class_boto to ensure equal presentation of bots account in both datasets. The baseline accuracy of training dataset was 91.73%, the baseline accuracy for test set was 91.77%. Both of which are quite high. <br/>
-<mark> By testing several model, we were able to achieve an accuracy up to  </mark> 
+<mark> By testing several models, we were able to achieve an accuracy up to **94.4%**. </mark> 
 
 
 
