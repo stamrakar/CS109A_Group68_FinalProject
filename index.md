@@ -8,10 +8,6 @@ title: CS109A Data Science Final Project
 
 ![Image Text](https://i.ibb.co/KDd8fKN/Twitter-Logo-Blue.png)
 
-<a href="https://imgbb.com/"><img src="https://i.ibb.co/KDd8fKN/Twitter-Logo-Blue.png" alt="Twitter-Logo-Blue" border="0" /></a>
-
-![Image Text](https://cfcdnpull-creativefreedoml.netdna-ssl.com/wp-content/uploads/2017/06/Twitter-logo-2012.png)
-
 #### Motivation: 
 
 The primary goal of this project is to detect Twitter bots by being able to differentiate the source of a tweet between a Twitter bot or human. To accomplish this, we must categorize the two main types of Twitter accounts that we are interested in for analysis. The first type being Twitter accounts that have direct human involvement but with a fake persona and specific purposes (e.g. spreading fake news, manipulation of online rating and review systems, etc.). The second type being “bot” Twitter accounts, that lack direct human involvement in generating tweets. The “bot” accounts, irrespective of their intention (whether to reduce human activity or malicious intent), will all be regarded as “bot” Twitter accounts as long as there is no direct involvement of a human. “No direct human involvement” can be defined as the actions of tweeting / retweeting / liking that are not the result of direct human operations.
