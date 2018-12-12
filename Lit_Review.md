@@ -1,13 +1,14 @@
+---
+nav_include: 3
+title: Literature Review and Related Work
+notebook: Lit_Review.ipynb
+---
 
 <mark> TO DO: </mark>  <br/>
 
 *   <mark> Make sure TOC links work</mark>  
 *   <mark> add link to botometer documentation
 *   <mark> add report write-up for each reference
-
-#Literature Review and Related Work
-
-
 
 <a id ='TOC'></a>
 ### Table of Contents
