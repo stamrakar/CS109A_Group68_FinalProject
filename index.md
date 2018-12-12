@@ -1,6 +1,8 @@
 ---
 title: CS109A Data Science Final Project
+nav_include: 1
 ---
+
 
 ### Machine Learning & Analysis for Twitter Bot Detection 
 #### Contributors: Group #68: Nisrine Elhauz, Huan Liu, Fayzan Talpur, Samasara Tamrakar 
