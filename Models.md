@@ -5,27 +5,8 @@ nav_include: 2
 ---
 
 
-
-<a id ='TOC'></a>
-#### Table of Contents
-
+{:.no_toc} *
 {: toc}
-4 [Models](#Models) <br/> 
-    4.1 [Baseline Model - Simple Linear Regression](#Baseline-Model) <br/>
-    4.2 [Linear Regression with Ridge](#Linear-Regression-with-Ridge) <br/>
-    4.3 [Lasso](#Lasso) <br/>
-    4.4 [Lasso and Ridge Coefficients Comparison](#Lasso-and-Ridge-Coefficients-Comparison) <br/>
-    4.5 [Logistic Regression](#Logistic-Regression) <br/>
-    4.6 [Logistic Regression with cross validation](#Logistic-Regression-with-cross-validation) <br/>
-    4.7 [Logistic Regression with polynomial degree 3](#Logistic-Regression-with-polynomial-degree-3) <br/>
-    4.8 [KNN](#KNN) <br/>
-    4.9 [Decision tree](#Decision-tree) <br/>
-    4.10 [Random Forest](#Random-Forest) <br/>
-    4.11 [Boosting - AdaBoost Classifier](#Boosting-AdaBoost-Classifier) <br/>
-    4.12 [SVM](#SVM) <br/>
-    4.13 [K-Means Clustering](#KMeans-Clustering) <br/>
-    4.14 [Validate Botometer Results](#Validate-Botometer-Results) <br/>
-    4.15 [Sentence Embeddings + Clutering + Neural Networks](#Sentence-Embeddings-Clutering-Neural-Networks)<br/>
 
 
 ___
