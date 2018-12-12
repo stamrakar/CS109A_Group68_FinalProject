@@ -1,8 +1,4 @@
----
-title: Test Notebook
-notebook: Testing_NB.ipynb
-nav_include: 3
----
+
 
 #### test notebook 
 ## Machine Learning Analysis for Twitter Bot Detection
