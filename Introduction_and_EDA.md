@@ -1,7 +1,7 @@
 ---
 title: Introduction and EDA
 notebook: Introduction_and_EDA.ipynb
-nav_include: 2
+nav_include: 1
 ---
 
 <a id ='TOC'></a>
