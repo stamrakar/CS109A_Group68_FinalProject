@@ -5,10 +5,12 @@ nav_include: 2
 ---
 
 
+
 <a id ='TOC'></a>
 #### Table of Contents
 
-4 [Models](#Models) <br/>
+{: toc}
+4 [Models](#Models) <br/> 
     4.1 [Baseline Model - Simple Linear Regression](#Baseline-Model) <br/>
     4.2 [Linear Regression with Ridge](#Linear-Regression-with-Ridge) <br/>
     4.3 [Lasso](#Lasso) <br/>
@@ -24,6 +26,7 @@ nav_include: 2
     4.13 [K-Means Clustering](#KMeans-Clustering) <br/>
     4.14 [Validate Botometer Results](#Validate-Botometer-Results) <br/>
     4.15 [Sentence Embeddings + Clutering + Neural Networks](#Sentence-Embeddings-Clutering-Neural-Networks)<br/>
+
 
 ___
 
