@@ -1,13 +1,9 @@
+---
+title: Models
+notebook: Models.ipynb
+nav_include: 3
+---
 
-# <img style="float: left; padding-right: 10px; width: 45px" src="https://raw.githubusercontent.com/Harvard-IACS/2018-CS109A/master/content/styles/iacs.png"> CS-109A Introduction to Data Science
-
-**Final Project - Milestone 4** <br/>
-**Project : Machine Learning & Analysis for Twitter Bot Detection** <br/>
-**Contributors: Group #68: Nisrine Elhauz, Huan Liu, Fayzan Talpur, Samasara Tamrakar** <br/>
-**Harvard University** <br/>
-**Fall 2018 ** 
-
-___
 
 <a id ='TOC'></a>
 #### Table of Contents
@@ -30,13 +26,11 @@ ___
     
 
 
-
 ___
 
 
 
 ```
-#@title 
 # Import Libraries, Global Options and Styles
 import requests
 from IPython.core.display import HTML
