@@ -14,9 +14,11 @@ The primary goal of this project is to detect Twitter bots by being able to diff
 
 
 #### Problem Statement:
-How to predict the probability of a given twitter account to be a bot (bot: no direct human involvement in generating tweets)
-(alternative: predicting the probability of a given tweet to be a bot tweet)
-  1. Solve as a classification problem of classifying an account to be bot or not-bot
-  2. Solve as an unsupervised problem of clustering twitter accounts into 2 (or several) clusters
 
-
+How to detect Twitter Bots using tweets data from Twitter developer API by using machine learning techniques. Our objective is to determine whether the source of tweets are from accounts that are bot users [1] or non-bot users [0].  (we define bot as: no direct human involvement in generating tweets) <br/>
+  1. Start by collection data using Twitter API
+  2. Perform feature engineering and preprocessing techniques to aggregate tweet features to account level features
+  3. Use Data visualization to understand the trend and patterns. 
+  4. Solve as a classification problem of classifying an account to be bot or not-bot
+  5. Solve as an unsupervised problem of clustering twitter accounts into 2 (or several) clusters
+  6. Conclude by comparing the models
