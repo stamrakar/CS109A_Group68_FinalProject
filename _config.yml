@@ -1,7 +1,6 @@
 theme: jekyll-theme-primer
 title: CS109A Final Project
 description: Machine Learning & Analysis for Twitter Bot Detection
-baseurl:
 markdown: kramdown
 kramdown:
     math_engine: mathjax
