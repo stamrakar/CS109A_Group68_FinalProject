@@ -1,8 +1,4 @@
----
-title: Literature Review and Related Work
-notebook: Lit_Review.ipynb
-nav_include: 3
----
+
 
 <mark> TO DO: </mark>  <br/>
 
